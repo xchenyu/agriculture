@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.agriculture.dao.PlanterDao">
+    <select id="view" resultType="com.example.agriculture.entity.CommonUse">
+        select
+            us.*,
+            pl.*
+        from user us
+        left join planter pl on us.user_id = pl.planter_user_id
+        where us.user_id = #{userId};
+    </select>
+
+    <select id="viewByPlanterId" resultType="com.example.agriculture.entity.CommonUse">
+        select
+            pl.*
+        from planter pl
+        where pl.planter_id = #{planterId};
+    </select>
+
+    <update id="edit" parameterType="com.example.agriculture.entity.CommonUse">
+        update planter
+        set
+            temperature = #{temperature},
+            planter_name = #{planterName},
+            env_humidity = #{envHumidity},
+            ph=#{ph},
+            light=#{light},
+            soil_humidity=#{soilHumidity}
+        where planter_id = #{planterId}
+    </update>
+
+
+    <insert id="insert" parameterType="com.example.agriculture.entity.CommonUse" useGeneratedKeys="true" keyProperty="planterId">
+        insert into planter(
+            planter_user_id , planter_only_key,temperature,env_humidity,ph,light,soil_humidity,planter_name
+        ) values (
+                    #{userId},#{planterOnlyKey},#{temperature},#{envHumidity},#{ph},#{light},#{soilHumidity},#{planterName}
+                 )
+    </insert>
+
+    <delete id="delete" parameterType="com.example.agriculture.entity.CommonUse">
+         delete from planter where planter_id = #{planterId}
+    </delete>
+
+</mapper>
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.agriculture.dao.LogisticsDao">
+    <select id="view" resultType="com.example.agriculture.entity.CommonUse">
+     select
+            pl.*,
+            pr.*,
+            lo.*
+        from  planter pl
+                 left join process pr on pl.planter_only_key = pr.process_only_key
+                 left join logistics lo on pl.planter_only_key = lo.logistics_only_key
+    </select>
+
+
+    <update id="edit" parameterType="com.example.agriculture.entity.CommonUse">
+        update logistics
+        set
+            location = #{location},
+            in_time = #{inTime},
+            out_time=#{outTime},
+            transport_person=#{transportPerson},
+            leave_address=#{leaveAddress},
+            arrive_address=#{arriveAddress}
+        where logistics_id = #{logisticsId}
+    </update>
+
+
+    <insert id="insert" parameterType="com.example.agriculture.entity.CommonUse" useGeneratedKeys="true" keyProperty="logisticsId" >
+        insert into logistics(
+            logistics_user_id,logistics_only_key,location,in_time,out_time,transport_person,leave_address,arrive_address
+        ) values (
+        #{userId},#{planterOnlyKey},#{location},#{inTime},#{outTime},#{transportPerson},#{leaveAddress},#{arriveAddress}
+        )
+    </insert>
+
+</mapper>

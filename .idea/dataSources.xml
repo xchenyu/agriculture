@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="old@localhost" uuid="18f406c0-b280-4961-86c8-2216fc8c7eb3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/old?serverTimezone=CTT</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="blood@localhost" uuid="940bd06f-ee19-4c0d-bf28-91413cdf45f2">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/blood?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT</jdbc-url>
+    </data-source>
+  </component>
+</project>

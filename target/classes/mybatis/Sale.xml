@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.agriculture.dao.SaleDao">
+    <select id="view" resultType="com.example.agriculture.entity.CommonUse">
+      select
+            pl.*,
+            pr.*,
+            lo.*,
+            sa.*
+        from  planter pl
+                 left join process pr on pl.planter_only_key = pr.process_only_key
+                 left join logistics lo on pl.planter_only_key = lo.logistics_only_key
+                 left join sale sa on pl.planter_only_key = sa.sale_only_key
+    </select>
+
+
+    <update id="edit" parameterType="com.example.agriculture.entity.CommonUse">
+        update sale
+        set
+            mall_name = #{mallName},
+            sale_time = #{saleTime},
+            price=#{price},
+            sale_only_key=#{saleOnlyKey}
+        where sale_id = #{saleId}
+    </update>
+
+
+    <insert id="insert" parameterType="com.example.agriculture.entity.CommonUse" useGeneratedKeys="true" keyProperty="saleId">
+        insert into sale(
+            sale_user_id,mall_name,sale_time,price,sale_only_key
+        ) values (
+             #{userId},#{mallName},#{saleTime},#{price},#{planterOnlyKey}
+                     )
+    </insert>
+</mapper>
